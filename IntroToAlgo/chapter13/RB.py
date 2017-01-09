@@ -43,15 +43,15 @@ def RB_postorder_walk(T, n):
         print n.key
 
 
-def RB_seach(T, n, key):
+def RB_search(T, n, key):
     if n == T.nil or n.key == key:
         return n
     if n.key > key:
-        return RB_seach(T, n.left, key)
+        return RB_search(T, n.left, key)
     else:
-        return RB_seach(T, n.right, key)
+        return RB_search(T, n.right, key)
 
-def RB_seach_iterative(T, n, key):
+def RB_search_iterative(T, n, key):
     while n != T.nil and n.key != key:
         if n.key > key:
             n = n.left
@@ -214,11 +214,18 @@ def RB_insert(T, n):
         if x.key > n.key:
             x = x.left
         else:
+            # Here include x.key == n.key
             x = x.right
     n.p = y
     if y == T.nil:
         T.root = n
-    elif n.key > y.key:
+    elif n.key >= y.key:
+
+        # Caution about the equal case
+
+        # This condition should be the same as above branching
+        # Please refer to the textbook for the right code
+
         y.right = n
     else:
         y.left = n
@@ -360,26 +367,27 @@ def RB_delete(T, z):
 def RB_tests():
     T = RBTree()
 
-    keys = [41, 38, 31, 12, 19, 8]
+    #keys = [41, 38, 31, 12, 19, 8]
+    #keys = [ 26, 17, 41, 14, 21, 30, 47, 10, 16, 19, 21, 28, 38, 7, 12, 14, 20, 35, 39, 3 ]
+    keys = [ 26, 17, 41, 14, 21, 30, 47, 10, 16, 19, 21]
 
     for key in keys:
         node = RBNode(key)
 
+        print "\nRB_insert %d:", key
         RB_insert(T, node)
-
-    print "root: ", T.root
-
-    RB_inorder_walk(T, T.root)
+        print "root: ", T.root
+        RB_inorder_walk(T, T.root)
 
     RB_delete(T, T.root)
 
     RB_inorder_walk(T, T.root)
 
     for key in keys[::-1]:
-        node = RB_seach(T, T.root, key)
+        node = RB_search(T, T.root, key)
 
         if node != T.nil:
-            print "RB_delete ", node
+            print "\nRB_delete ", node
             RB_delete(T, node)
             RB_inorder_walk(T, T.root)
 
