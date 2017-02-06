@@ -2,7 +2,7 @@
 
 import sys
 
-sys.path.append("../chapter13")
+sys.path.append("../C13_RB_trees")
 
 from RB import *
 

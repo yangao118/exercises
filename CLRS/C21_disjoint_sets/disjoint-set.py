@@ -111,5 +111,3 @@ def disjoint_set_tests():
 
 if __name__ == "__main__":
     disjoint_set_tests()
-
-

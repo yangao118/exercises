@@ -2,7 +2,7 @@
 
 import sys
 
-sys.path.append("../chapter12")
+sys.path.append("../C12_BST")
 
 from BST import *
 
